@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { Button } from './components/Button';
-import { MovieCard } from './components/MovieCard';
-
-// import { SideBar } from './components/SideBar';
-// import { Content } from './components/Content';
+import { SideBar } from './components/SideBar';
+import { Content } from './components/Content';
 
 import { api } from './services/api';
 
@@ -63,17 +60,17 @@ export function App() {
         <span>Watch<p>Me</p></span>
 
         <div className="buttons-container">
-          {genres.map(genre => (
-            <Button
-              id={String(genre.id)}
-              title={genre.title}
-              iconName={genre.name}
-              onClick={() => handleClickButton(genre.id)}
-              selected={selectedGenreId === genre.id}
-            />
-          ))}
-        </div>
+          {genres.map(genre => {
+            return (
+              <SideBar 
+                genre={genre}
+                handleClickButton={handleClickButton}
+                selectedGenreId={selectedGenreId}
+              />
 
+            )         
+          })}
+        </div>
       </nav>
 
       <div className="container">
@@ -83,9 +80,9 @@ export function App() {
 
         <main>
           <div className="movies-list">
-            {movies.map(movie => (
-              <MovieCard title={movie.Title} poster={movie.Poster} runtime={movie.Runtime} rating={movie.Ratings[0].Value} />
-            ))}
+            {movies.map(movie => {
+              return <Content movie={movie} />
+            })}
           </div>
         </main>
       </div>
